@@ -47,7 +47,7 @@
 </head>
 <body>
 	<div style="padding: 20px;">
-		<input id="digit" placeholder="请输入数字" type="number" />
+		<input id="digit" placeholder="请输入数字" type="text" />
 		<div class="btn" id="btn">确认</div>
 	</div>
 	<div class="canvas_box">
@@ -80,7 +80,11 @@
 			var y = 80;
 			var len = txt.length;
 			if(len===1){
-				
+				if(/^[\u4e00-\u9fa5]$/.test(txt)){
+					font = "bold 60px Microsoft YaHei,Arial,Helvetica,Sans-Serif";
+					x = 20;
+					y = 70;
+				}
 			} else if(len===2){
 				font = "bold 60px Microsoft YaHei,Arial,Helvetica,Sans-Serif";
 				x = 14;
