@@ -24,9 +24,12 @@
 	
 	<script type="text/javascript">
 		var c=document.getElementById("canvas");
+		var img=document.getElementById("img");
 		var ctx=c.getContext("2d");
 		ctx.rect(1,1,100,100);
 		ctx.stroke();
+		var dataURL = c.toDataURL();
+		img.src = dataURL;
 	</script>
 </body>
 </html>
