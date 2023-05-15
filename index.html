@@ -7,6 +7,7 @@
 	<title>生成数字图片</title>
 	<style>
 	.canvas_box{
+		display: none;
 		margin: 100px auto;
 		width: 100px;
 		height: 100px;
@@ -15,24 +16,91 @@
 			height: 100%;
 		}
 	}
+	#digit{
+		display: inline-block;
+		outline: none;
+		border: 1px solid #999;
+		border-radius: 5px;
+		height: 48px;
+		width: 50%;
+		margin-right: 20px;
+		font-size: 24px;
+		text-indent: 20px;
+	}
+	.btn{
+		display: inline-block;
+		padding: 0 20px;
+		line-height: 48px;
+		font-size: 24px;
+		color: #fff;
+		background: green;
+		border-radius: 5px;
+	}
+	.img_box{
+		width: 102px;
+		height: 102px;
+		margin: 20px auto;
+		border: 1px solid #666;
+		box-sizing: border-box;
+	}
 	</style>
 </head>
 <body>
-	<div class="canvas_box">
-		<canvas id="canvas"></canvas>
+	<div style="padding: 20px;">
+		<input id="digit" placeholder="请输入数字" type="number" />
+		<div class="btn" id="btn">确认</div>
 	</div>
-	
-	<div>
+	<div class="canvas_box">
+		<canvas id="canvas" width="100" height="100"></canvas>
+	</div>
+	<div class="img_box">
 		<image id="img" src=""></image>
 	</div>
+	
+	<div style="text-align: center; color: #999;">
+		<span>长按图片保存</span>
+	</div>
+	
 	<script type="text/javascript">
+		var btn=document.getElementById("btn");
+		var digit=document.getElementById("digit");
 		var c=document.getElementById("canvas");
 		var img=document.getElementById("img");
 		var ctx=c.getContext("2d");
-		ctx.rect(1,1,100,100);
-		ctx.stroke();
 		var dataURL = c.toDataURL();
-		img.src = dataURL;
+		var txt;
+		btn.onclick = createFun;
+		function createFun(){
+			txt = digit.value;
+			if(!txt){
+				return false;
+			}
+			var font = "bold 80px Microsoft YaHei,Arial,Helvetica,Sans-Serif";
+			var x = 25;
+			var y = 80;
+			var len = txt.length;
+			if(len===1){
+				
+			} else if(len===2){
+				font = "bold 60px Microsoft YaHei,Arial,Helvetica,Sans-Serif";
+				x = 14;
+				y = 70;
+			} else if(len===3){
+				font = "bold 40px Microsoft YaHei,Arial,Helvetica,Sans-Serif";
+				x = 12;
+				y = 65;
+			} else {
+				return false;
+			}
+			ctx.clearRect(0,0,100,100);
+			ctx.fillStyle="#000000";
+			ctx.fillRect(0,0,100,100);
+			ctx.font=font;
+			ctx.fillStyle="#FFFFFF";
+			ctx.fillText(txt,x,y);
+			img.src = c.toDataURL();
+		}
+		
 	</script>
 </body>
 </html>
